@@ -8,7 +8,7 @@ const EduDetails = () => {
     let localUserInfo = JSON.parse(localStorage.getItem('userInfo'));
 
     let names = localUserInfo.map(
-        (person => (person.Reg1['firstname'] + ' ' + person.Reg1['lastname']))
+        (person => (person.Reg1['firstName'] + ' ' + person.Reg1['lastName']))
     )
     let Eduinfo = localUserInfo.map(user =>
     (user.Reg2.map((education, i) =>
@@ -17,14 +17,13 @@ const EduDetails = () => {
         <Aux key={i}>
             <tr>
                 <td>{(user.Reg2.indexOf(education) === 0) ? names[localUserInfo.indexOf(user)] : ''}</td>
-                <td>{education.institute}</td>
+                <td>{education.Insititue}</td>
                 <td>{education.course}</td>
                 <td>{education.percentage}</td>
                 <td>{education.startDate}</td>
-                <td>{education.endDate}</td>
+                <td>{education.EndDate}</td>
                 <td >
-                {/* onClick={(event) => this.editRecord(event, localUserInfo.indexOf(user), user.Reg2.indexOf(education))} */}
-                {/* onClick={(event) => this.deleteRecord(event, localUserInfo.indexOf(user), user.Reg2.indexOf(education))} */}
+                
                     <Button btnType="Success">Edit</Button>
                     <Button btnType="Danger">Delete</Button>
                 </td>

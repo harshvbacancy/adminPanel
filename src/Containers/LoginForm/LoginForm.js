@@ -40,7 +40,7 @@ class LoginForm extends Component {
 
         },
         formIsValid: false,
-        logedIn: false
+    
     }
 
     loginDataHandler = (event) => {
@@ -71,11 +71,12 @@ class LoginForm extends Component {
             }
         }
         if (bothValid) {
-            this.setState({logedIn: true})
+            this.props.LoginForm()
+            
             localStorage.setItem('activeuser', email);
             this.setState({ message: null });
             alert('Successfully Logged In...');
-             this.props.history.push('/');
+              this.props.history.push('/');
         }
         else {
             if (wrongEmail) {
@@ -167,9 +168,7 @@ class LoginForm extends Component {
                     <NavLink to='/' activeStyle={{textDecoration:"none"}}>Forgot password?</NavLink>
                     <NavLink to='/Register' activeStyle={{textDecoration:"none"}}>Don't have an account? Create one</NavLink>
                 </div>
-                <div>
-                    <Layout logedInInfo={this.state.logedIn} />
-                </div>
+                
 
 
             </form>

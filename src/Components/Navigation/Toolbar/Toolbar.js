@@ -20,7 +20,8 @@ class Toolbar extends Component {
                 <h2>Logo</h2>
                 <h1>Admin Panel</h1>
                 <nav>
-                    {navItems}
+                     {navItems}
+                    
                 </nav>
 
             </header>

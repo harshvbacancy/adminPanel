@@ -2,15 +2,17 @@ import React, { Component } from 'react';
 import Aux from '../Auxiliary/Auxiliary';
 import Toolbar from '../../Components/Navigation/Toolbar/Toolbar';
 
-
-
 class Layout extends Component {
     state = {
         login: false
     }
 
     loginHandler = () => {
-        this.setState({ login: this.props.logedInInfo })
+
+        const checkLogin = this.props.logedInInfo
+        this.setState({ login: checkLogin })
+        console.log(checkLogin)
+        
     }
 
     logoutHandler = () => {
@@ -21,7 +23,7 @@ class Layout extends Component {
     }
 
     componentDidMount() {
-        //set user and userInfo arrays if not there
+      
         if (!localStorage.getItem('user')) {
             localStorage.setItem('user', '[]')
         }
@@ -34,6 +36,7 @@ class Layout extends Component {
 
         let message
         if (this.state.login === true) {
+
             message = <h3>Logged in as {localStorage.getItem('activeuser')}</h3>
         }
         else {
@@ -41,7 +44,7 @@ class Layout extends Component {
         }
         return (
             <Aux>
-                <Toolbar login={this.state.login} logOut={this.logoutHandler} loginMessage={message} />
+                <Toolbar login={this.loginHandler} logOut={this.logoutHandler} loginMessage={message} />
                 <main>
                     {this.props.children}
                 </main>

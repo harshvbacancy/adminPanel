@@ -2,15 +2,11 @@ import { Component } from "react";
 
 class EditInfo extends Component {
 
-
-
     state = {
         showModal: false
     }
 
-
-
-    editRecord = (event, userIndex, eduIndex) => {
+    handleEdit = (event, userIndex, eduIndex) => {
         let localUserInfo = JSON.parse(localStorage.getItem('userInfo'));
         let user = localUserInfo[userIndex];
         let edu = user.Reg2[eduIndex];
@@ -18,7 +14,7 @@ class EditInfo extends Component {
         this.setState({ showModal: true, userIndex: userIndex, eduIndex: eduIndex });
 
     }
-    deleteRecord = (event, userIndex, eduIndex) => {
+    handleDelete = (event, userIndex, eduIndex) => {
         let isConfirm = window.confirm('Delete this eduction record?');
         if (isConfirm) {
             let values = JSON.parse(localStorage.getItem('userInfo'));
@@ -27,7 +23,7 @@ class EditInfo extends Component {
             user.Reg2.splice(eduIndex, 1);
             values[userIndex] = user;
             localStorage.setItem('userInfo', JSON.stringify(values))
-            this.props.history.push('/educationalDetails2')
+            this.props.history.push('/educationalDetails')
         }
     }
     submitChanges = () => {
@@ -38,7 +34,7 @@ class EditInfo extends Component {
         localStorage.setItem('userInfo', JSON.stringify(values));
         this.setState({ showModal: false })
         alert('successfully changed..');
-        this.props.history.push('/educationalDetails2');
+        this.props.history.push('/educationalDetails');
     }
     handleModalChange = (event) => {
         let edu = this.state.edu;
@@ -89,6 +85,7 @@ class EditInfo extends Component {
             </Modal>
 
         );
+        
 
     }
 }

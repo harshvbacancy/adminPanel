@@ -10,10 +10,10 @@ const PerDetails = () => {
         (
             <Aux key={id}>
                 <tr> 
-                    <td>{user.Reg1.firstname+" "+user.Reg1.lastname}</td>                
-                    <td>{user.Reg1.gender}</td>
-                    <td>{user.Reg1.email}</td>                  
-                    <td>{user.Reg1.phone}</td>
+                    <td>{user.Reg1.firstName+" "+user.Reg1.lastName}</td>                
+                    <td>{user.Reg1.Gender}</td>
+                    <td>{user.Reg1.Email}</td>                  
+                    <td>{user.Reg1.phoneNumber}</td>
                 </tr>
             </Aux>
         ))
