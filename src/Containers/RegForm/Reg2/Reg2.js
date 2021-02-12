@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import Button from '../../../Components/UI/Button/Button';
 import Input from '../../../Components/UI/Input/Input';
@@ -101,6 +102,7 @@ class Reg2 extends Component {
         ]
         updatedReg2Data.push(formData)
         console.log(updatedReg2Data)
+
         localStorage.setItem('EduInfo', JSON.stringify(updatedReg2Data))
 
         for (let inputId in updatedRegForm) {
@@ -111,14 +113,32 @@ class Reg2 extends Component {
         this.setState({ RegForm: updatedRegForm, Reg2Data: updatedReg2Data, isFormValid: false })
     }
 
+    // eduDataHandler2 = () => {
+    //     let formData = {}
+    //     for (let formElement in this.state.RegForm) {
+    //         formData[formElement] = this.state.RegForm[formElement].value;
+    //     }
+    //     const updatedRegForm = {
+    //         ...this.state.RegForm
+    //     }
+    //     const updatedReg2Data = [
+    //         ...this.state.Reg2Data
+    //     ]
+    //     updatedReg2Data.push(formData)
+
+    //     // console.log('formdata--', formData)
+    //     this.setState({ Reg2Data: updatedReg2Data })
+
+    // }
     registerHandler = () => {
-        this.edudataHandler()
+
+        this.eduDataHandler()
         alert('Registered Successfully...')
         const Reg1 = JSON.parse(localStorage.getItem('PerInfo'))
         const Reg2 = JSON.parse(localStorage.getItem('EduInfo'))
-        var email = Reg1['email'];
+        var email = Reg1['Email'];
         var password = Reg1['password'];
-        
+
         let localUser = JSON.parse(localStorage.getItem('user'));
         if (localUser) {
             localUser.push({ email: email, password: password });
@@ -126,6 +146,7 @@ class Reg2 extends Component {
         } else {
             localStorage.setItem('user', JSON.stringify([{ email: email, password: password }]));
         }
+        console.log(localUser)
 
         let localUserInfo = JSON.parse(localStorage.getItem('userInfo'));
         if (localUserInfo) {
@@ -137,8 +158,13 @@ class Reg2 extends Component {
 
         localStorage.removeItem('PerInfo')
         localStorage.removeItem('EduInfo')
-        // this.props.history.push('/')
+        this.props.history.push('/')
     }
+
+    previousDataHandler = () => {
+        this.props.history.goBack();
+    }
+
 
     checkLength(value, rules) {
         let isReqMinLength = true;
@@ -194,7 +220,6 @@ class Reg2 extends Component {
         this.setState({ RegForm: updatedRegForm, formIsValid: updatedFormIsValid })
     }
     render() {
-
         const formElementsArray = [];
         for (let key in this.state.RegForm) {
             formElementsArray.push({
@@ -202,6 +227,22 @@ class Reg2 extends Component {
                 config: this.state.RegForm[key]
             });
         }
+        let previousEduData = [];
+        if (this.state.Reg2Data.length) {
+            previousEduData = [...this.state.Reg2Data];
+
+        }
+
+        let priviousDataBoxes = previousEduData && previousEduData.map((d, index) => <div>
+            <h3>Educational Information set {index + 1}</h3>
+            <ul>
+                <li>Insititue: {d.Insititue}</li>
+                <li>Course: {d.course}</li>
+                <li>Percentage: {d.percentage}</li>
+                <li>Start Date: {d.startDate}</li>
+                <li>End Date: {d.EndDate}</li>
+            </ul>
+        </div>);
 
         let form = (
             <form  >
@@ -222,6 +263,7 @@ class Reg2 extends Component {
                 ))}
                 <Button
                     btnType="Success"
+                    clicked={this.previousDataHandler}
                 >Previous
                 </Button>
                 <Button
@@ -242,6 +284,7 @@ class Reg2 extends Component {
 
         return (
             <div className={classes.Reg2}>
+                {priviousDataBoxes}
                 <h2>Educational Information</h2>
                 {form}
             </div>

@@ -3,6 +3,7 @@ import React from 'react';
 import Button from '../../UI/Button/Button';
 import Aux from '../../../hoc/Auxiliary/Auxiliary';
 
+
 const EduDetails = () => {
     let localUserInfo = JSON.parse(localStorage.getItem('userInfo'));
 

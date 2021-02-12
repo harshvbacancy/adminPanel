@@ -134,7 +134,7 @@ class Reg1 extends Component {
             formData[formElement] = this.state.RegForm[formElement].value;
         }
         localStorage.setItem('PerInfo', JSON.stringify(formData))
-        // this.props.history.push('/Register-step2');
+         this.props.history.push('/Reg2');
 
     }
 
@@ -153,9 +153,7 @@ class Reg1 extends Component {
 
             this.setState({ RegForm: updatedReg1, IsFormValid: true })
         }
-        // else{
-        //     document.getElementById('Reg1').reset()
-        // }
+       
 
     }
 
@@ -236,10 +234,7 @@ class Reg1 extends Component {
                         touched={formElement.config.touched}
                         changed={(event) => this.inputChangedHandler(event, formElement.id)} />
                 ))}
-                <Button
-                    btnType="Primary" >
-                    Forgot Password?
-                    </Button>
+               
                 <Button
                     btnType="Success"
                     disabled={!this.state.formIsValid}

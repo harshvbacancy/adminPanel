@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Button from '../../Components/UI/Button/Button';
+import { NavLink, withRouter } from 'react-router-dom';
 import Input from '../../Components/UI/Input/Input';
+import Layout from '../../hoc/Layout/Layout';
 import classes from './LoginForm.module.css';
 
 class LoginForm extends Component {
@@ -37,7 +39,8 @@ class LoginForm extends Component {
             },
 
         },
-        formIsValid: false
+        formIsValid: false,
+        logedIn: false
     }
 
     loginDataHandler = (event) => {
@@ -48,10 +51,10 @@ class LoginForm extends Component {
         let bothValid = false;
         let wrongEmail = true;
         let wrongPassword = false;
-        let userdata = JSON.parse(localStorage.getItem('users'));
+        let userdata = JSON.parse(localStorage.getItem('user'));
         if (userdata) {
             for (let u = 0; u < userdata.length; u++) {
-                //is it stored in local storage
+               
                 if (email === userdata[u].email) {
                     wrongEmail = false;
                     if (password === userdata[u].password) {
@@ -68,12 +71,11 @@ class LoginForm extends Component {
             }
         }
         if (bothValid) {
-            // this.props.login()
-
+            this.setState({logedIn: true})
             localStorage.setItem('activeuser', email);
             this.setState({ message: null });
             alert('Successfully Logged In...');
-            // this.props.history.push('/');
+             this.props.history.push('/');
         }
         else {
             if (wrongEmail) {
@@ -151,7 +153,7 @@ class LoginForm extends Component {
                         touched={formElement.config.touched}
                         changed={(event) => this.inputChangedHandler(event, formElement.id)} />
                 ))}
-
+               
                 <div className={classes.Container}>
                     <Button
                         btnType="Danger"
@@ -162,11 +164,13 @@ class LoginForm extends Component {
 
                     <div style={{ color: 'red' }}>{this.state.message}</div>
 
-                    <Button
-                        btnType="Primary" >
-                        Do not have an account? Create one
-                    </Button>
+                    <NavLink to='/' activeStyle={{textDecoration:"none"}}>Forgot password?</NavLink>
+                    <NavLink to='/Register' activeStyle={{textDecoration:"none"}}>Don't have an account? Create one</NavLink>
                 </div>
+                <div>
+                    <Layout logedInInfo={this.state.logedIn} />
+                </div>
+
 
             </form>
         );
@@ -179,4 +183,4 @@ class LoginForm extends Component {
         )
     }
 }
-export default LoginForm;
+export default withRouter(LoginForm);
