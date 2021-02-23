@@ -1,8 +1,10 @@
+
 import React, { Component } from 'react';
 import Button from '../../Components/UI/Button/Button';
-import { NavLink, withRouter } from 'react-router-dom';
+import {  withRouter } from 'react-router-dom';
 import Input from '../../Components/UI/Input/Input';
 import Layout from '../../hoc/Layout/Layout';
+import {NavLink} from 'react-router-dom'
 import classes from './LoginForm.module.css';
 
 class LoginForm extends Component {
@@ -39,8 +41,8 @@ class LoginForm extends Component {
             },
 
         },
-        formIsValid: false,
-    
+        
+        loggedIn: false
     }
 
     loginDataHandler = (event) => {
@@ -71,12 +73,12 @@ class LoginForm extends Component {
             }
         }
         if (bothValid) {
-            this.props.LoginForm()
-            
+            // this.props.LoginForm()
+            this.props.loggedInNavItems()          
             localStorage.setItem('activeuser', email);
             this.setState({ message: null });
             alert('Successfully Logged In...');
-              this.props.history.push('/');
+              this.props.history.push('/loggedIn');
         }
         else {
             if (wrongEmail) {
@@ -165,10 +167,13 @@ class LoginForm extends Component {
 
                     <div style={{ color: 'red' }}>{this.state.message}</div>
 
-                    <NavLink to='/' activeStyle={{textDecoration:"none"}}>Forgot password?</NavLink>
-                    <NavLink to='/Register' activeStyle={{textDecoration:"none"}}>Don't have an account? Create one</NavLink>
+                    <NavLink to='/' activeStyle={{textDecoration:"none"}}>Forgot password?</NavLink> 
+                     <NavLink to='/Reg1' activeStyle={{textDecoration:"none"}}>Don't have an account? Create one</NavLink>
                 </div>
-                
+                {/* <div>
+                    <h1>isloggedin= {this.state.loggedIn}</h1>
+                    <Layout isLoggedIn = {this.state.loggedIn}/>
+                </div> */}
 
 
             </form>

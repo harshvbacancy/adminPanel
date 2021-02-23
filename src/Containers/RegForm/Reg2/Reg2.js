@@ -88,8 +88,8 @@ class Reg2 extends Component {
         isFormValid: false
     }
 
-    eduDataHandler = () => {
-
+    eduDataHandler = (event) => {
+       
         let formData = {}
         for (let formElement in this.state.RegForm) {
             formData[formElement] = this.state.RegForm[formElement].value;
@@ -103,7 +103,6 @@ class Reg2 extends Component {
         updatedReg2Data.push(formData)
         console.log(updatedReg2Data)
 
-        localStorage.setItem('EduInfo', JSON.stringify(updatedReg2Data))
 
         for (let inputId in updatedRegForm) {
             updatedRegForm[inputId].value = '';
@@ -111,6 +110,7 @@ class Reg2 extends Component {
             updatedRegForm[inputId].touched = false;
         }
         this.setState({ RegForm: updatedRegForm, Reg2Data: updatedReg2Data, isFormValid: false })
+        localStorage.setItem('EduInfo', JSON.stringify(updatedReg2Data))
     }
 
     // eduDataHandler2 = () => {
@@ -134,8 +134,10 @@ class Reg2 extends Component {
 
         this.eduDataHandler()
         alert('Registered Successfully...')
-        const Reg1 = JSON.parse(localStorage.getItem('PerInfo'))
+        
+        const Reg1 = JSON.parse(sessionStorage.getItem('PerInfo'))
         const Reg2 = JSON.parse(localStorage.getItem('EduInfo'))
+
         var email = Reg1['Email'];
         var password = Reg1['password'];
 
@@ -156,9 +158,8 @@ class Reg2 extends Component {
             localStorage.setItem('userInfo', JSON.stringify([{ Reg1: Reg1, Reg2: Reg2 }]));
         }
 
-        localStorage.removeItem('PerInfo')
-        localStorage.removeItem('EduInfo')
-        this.props.history.push('/')
+       sessionStorage.clear();
+        this.props.history.push('/Login')
     }
 
     previousDataHandler = () => {

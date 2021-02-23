@@ -130,16 +130,30 @@ class Reg1 extends Component {
     perDataHandler = (event) => {
         event.preventDefault()
         const formData = {};
+        
         for (let formElement in this.state.RegForm) {
             formData[formElement] = this.state.RegForm[formElement].value;
         }
-        localStorage.setItem('PerInfo', JSON.stringify(formData))
+        console.log(formData)
+        let usersArray= JSON.parse(localStorage.getItem('user'));
+      
+        if(usersArray){
+            for(let user in usersArray){
+                console.log('formData:0',formData.Email)
+                console.log('userArray:',usersArray[user].email)
+                if(formData.Email === usersArray[user].email){
+                    alert("Already Registered!!!!");
+                    return;
+                }
+            }
+        }
+        sessionStorage.setItem('PerInfo', JSON.stringify(formData))
          this.props.history.push('/Reg2');
 
     }
 
     componentDidMount() {
-        let oldReg1 = JSON.parse(localStorage.getItem('PerInfo'))
+        let oldReg1 = JSON.parse(sessionStorage.getItem('PerInfo'))
         if (oldReg1) {
 
             const updatedReg1 = {
@@ -149,9 +163,13 @@ class Reg1 extends Component {
                 updatedReg1[inputId].value = oldReg1[inputId]
                 updatedReg1[inputId].touched = true
                 updatedReg1[inputId].valid = true
-            }
+                updatedReg1[inputId].reqLength = true
+                
 
-            this.setState({ RegForm: updatedReg1, IsFormValid: true })
+            }
+            console.log(updatedReg1)
+
+            this.setState({ RegForm: updatedReg1, formIsValid: true})
         }
        
 

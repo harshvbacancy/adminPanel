@@ -6,7 +6,7 @@ import classes from './NavigationItems.module.css'
 
 class LogedInNavItems extends Component  {
     render() {
-    //  let logedOut
+    //  let logedOutnjhfvhnhjfg
     // if (this.props.logout) {
     //     logedOut = <NavigationItem Link="/">Log Out</NavigationItem>
     // }
@@ -15,7 +15,8 @@ class LogedInNavItems extends Component  {
         <ul className={classes.NavigationItems}>
             <NavigationItem link="/personalDetails">Personal Details</NavigationItem>
             <NavigationItem link="/educationalDetails">Educational Details</NavigationItem>
-             {/* {logedOut}  */}
+            <NavigationItem link="/changePassword">Change Password</NavigationItem>
+            <NavigationItem link="/">Logout</NavigationItem>
         </ul>
     );
     }

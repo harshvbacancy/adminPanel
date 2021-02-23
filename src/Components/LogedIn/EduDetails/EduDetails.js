@@ -2,6 +2,8 @@ import classes from './EduDetails.module.css';
 import React, { Component } from 'react';
 import Button from '../../UI/Button/Button';
 import Aux from '../../../hoc/Auxiliary/Auxiliary';
+import Modal from 'react-modal';
+
 
 
 class  EduDetails extends Component {
@@ -11,11 +13,13 @@ class  EduDetails extends Component {
     }
 
     handleEdit = (event, userIndex, eduIndex) => {
+        console.log('vdfv')
         let localUserInfo = JSON.parse(localStorage.getItem('userInfo'));
         let user = localUserInfo[userIndex];
         let edu = user.Reg2[eduIndex];
         this.setState({ edu });
         this.setState({ showModal: true, userIndex: userIndex, eduIndex: eduIndex });
+        console.log(this.state.showModal)
 
     }
     handleDelete = (event, userIndex, eduIndex) => {
@@ -50,6 +54,46 @@ class  EduDetails extends Component {
     render() {
     let localUserInfo = JSON.parse(localStorage.getItem('userInfo'));
 
+    let mymodal=(
+        <Modal 
+                    isOpen={this.state.showModal}
+                    contentLabel="Modal"
+                >
+                    <form onSubmit={this.submitChanges} >
+                    <table style={{width:'90%',border:'none',boxShadow:'none'}}>
+                        <tr>
+                            <th>Institute:</th> 
+                            <td><input type="text" name='institute' value={this.state.edu?this.state.edu.Institute:''} onChange={(event)=>this.handleModalChange(event)} required /></td>
+                        </tr>
+                        <tr>
+                            <th>Course:</th> 
+                            <td><input type="text" name='course' value={this.state.edu?this.state.edu.course:''} onChange={(event)=>this.handleModalChange(event)} required/></td>
+                        </tr>
+                        <tr>
+                            <th>Percentage/CGPA:</th> 
+                            <td><input type="text" name='percentage' value={this.state.edu?this.state.edu.percentage:''} onChange={(event)=>this.handleModalChange(event)} required /></td>
+                        </tr>
+                        <tr>
+                            <th>Start Date:</th> 
+                            <td><input type="date" name='startDate' value={this.state.edu?this.state.edu.startDate:''} onChange={(event)=>this.handleModalChange(event)} required/></td>
+                        </tr>
+                        <tr>
+                            <th>End Date:</th> 
+                            <td><input type="date" name='endDate' value={this.state.edu?this.state.edu.endDate:''} onChange={(event)=>this.handleModalChange(event)} required /></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                            <button type="submit">submit</button>
+                            </td>
+                        </tr>
+                    </table>
+                    
+                    </form>
+                    
+                </Modal>
+
+    );
     let names = localUserInfo.map(
         (person => (person.Reg1['firstName'] + ' ' + person.Reg1['lastName']))
     )
@@ -77,7 +121,7 @@ class  EduDetails extends Component {
     )))
     return (
         <div>
-            {/* {mymodal}  */}
+            {mymodal} 
             <h2 className={classes.EduTitle}>Users Educational Information</h2>
             <table className={classes.EduDetails} key={new Date()}>
                 <tr>
