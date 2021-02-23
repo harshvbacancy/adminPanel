@@ -55,7 +55,7 @@ class App extends Component {
             <Route path='/personalDetails' component={PerDetails} />
             <Route path='/educationalDetails' component={EduDetails} />
             <Route path='/changePassword' component={ChangePassword} />
-            <Route path="/" exact render={() => <Home logout={this.logoutHandler} />} />
+            <Route path="/Home" exact render={() => <Home logout={this.logoutHandler} />} />
           </Switch>
 
         </BrowserRouter>

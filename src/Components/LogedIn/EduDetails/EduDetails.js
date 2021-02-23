@@ -63,7 +63,7 @@ class  EduDetails extends Component {
                     <table style={{width:'90%',border:'none',boxShadow:'none'}}>
                         <tr>
                             <th>Institute:</th> 
-                            <td><input type="text" name='institute' value={this.state.edu?this.state.edu.Institute:''} onChange={(event)=>this.handleModalChange(event)} required /></td>
+                            <td><input type="text" name='institute' value={this.state.edu?this.state.edu.Insititue:''} onChange={(event)=>this.handleModalChange(event)} required /></td>
                         </tr>
                         <tr>
                             <th>Course:</th> 
@@ -79,7 +79,7 @@ class  EduDetails extends Component {
                         </tr>
                         <tr>
                             <th>End Date:</th> 
-                            <td><input type="date" name='endDate' value={this.state.edu?this.state.edu.endDate:''} onChange={(event)=>this.handleModalChange(event)} required /></td>
+                            <td><input type="date" name='endDate' value={this.state.edu?this.state.edu.EndDate:''} onChange={(event)=>this.handleModalChange(event)} required /></td>
                         </tr>
                         <tr>
                             <td></td>

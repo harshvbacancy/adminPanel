@@ -16,7 +16,7 @@ class LogedInNavItems extends Component  {
             <NavigationItem link="/personalDetails">Personal Details</NavigationItem>
             <NavigationItem link="/educationalDetails">Educational Details</NavigationItem>
             <NavigationItem link="/changePassword">Change Password</NavigationItem>
-            <NavigationItem link="/">Logout</NavigationItem>
+            <NavigationItem link="/Home">Logout</NavigationItem>
         </ul>
     );
     }

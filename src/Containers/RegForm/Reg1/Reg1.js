@@ -52,7 +52,7 @@ class Reg1 extends Component {
                         { value: 'other', displayValue: 'other' },
                     ]
                 },
-                value: '',
+                value: 'Male',
                 validation: {
                     required: false
                 },
